@@ -1,4 +1,4 @@
-package upc.edu.minimo;
+package edu.upc.minimo;
 
 
 import java.util.ArrayList;

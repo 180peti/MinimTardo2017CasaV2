@@ -1,4 +1,4 @@
-package upc.edu.minimo;
+package edu.upc.minimo;
 
 import org.apache.log4j.Logger;
 
@@ -32,6 +32,13 @@ public class ProductManagerImpl implements ProductManager {
         productos.add(a);
         a=new Producto("Pescado",13);
         productos.add(a);
+
+        Usuario u=new Usuario("Pepe");
+        usuarios.put(u.getNombre(),u);
+        u=new Usuario("Pol");
+        usuarios.put(u.getNombre(),u);
+        u=new Usuario("Ruben");
+        usuarios.put(u.getNombre(),u);
     }
 
     public static ProductManagerImpl getInstance(){
@@ -112,6 +119,7 @@ public class ProductManagerImpl implements ProductManager {
             cantidad=siguiente.getCantidades().get(pr.getNombre());
             frase=frase+"Aqui tiene "+cantidad+" unidades del producto "+pr.getNombre()+": "+cantidad*pr.getPrecio()+"\n";
             precio=precio+cantidad*pr.getPrecio();
+            pr.setVentas(cantidad);
         }
         log.info(pedidos);
         usuarios.get(siguiente.getUsuario()).pedidoRealizado();

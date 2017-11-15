@@ -1,4 +1,4 @@
-package upc.edu.minimo;
+package edu.upc.minimo;
 
 import org.junit.After;
 import org.junit.Before;
@@ -11,12 +11,6 @@ public class ProductManagerImplTest {
     @Before
     public void setUp() throws Exception {
         test=ProductManagerImpl.getInstance();
-        Usuario u=new Usuario("Pepe");
-        test.setUsuario(u);
-        u=new Usuario("Pol");
-        test.setUsuario(u);
-        u=new Usuario("Ruben");
-        test.setUsuario(u);
     }
 
     @After
