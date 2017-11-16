@@ -31,15 +31,16 @@ public class ProductManagerImplTest {
         cantidad2[0]=1;
         cantidad2[1]=2;
         cantidad2[2]=3;
-        String resultado1=test.realizarPedido("Pepe",cosas,cantidad1);
+        boolean resultado1=test.realizarPedido("Pepe",cosas,cantidad1);
         assertEquals(0,test.getPedidos().size());
-        assertEquals(""+"Numero de productos distinto a numero de cantidades",resultado1);
-        String resultado2=test.realizarPedido("Juan",cosas,cantidad2);
+        assertFalse(resultado1);
+        boolean resultado2=test.realizarPedido("Juan",cosas,cantidad2);
         assertEquals(0,test.getPedidos().size());
-        assertEquals(""+"El usuario no esta autorizado a realizar pedidos",resultado2);
-        String resultado3=test.realizarPedido("Ruben",cosas,cantidad2);
+        assertFalse(resultado2);
+        boolean resultado3=test.realizarPedido("Ruben",cosas,cantidad2);
         assertEquals(1,test.getPedidos().size());
         assertEquals(2,test.getPedidos().get(0).getProductos().size());
+        assertTrue(resultado3);
     }
 
     @Test

@@ -9,9 +9,9 @@ public class ProductManagerImpl implements ProductManager {
 
     ArrayList<Producto> productos;
     HashMap<String,Usuario> usuarios;
-    ArrayList<Pedido> pedidos;
+    ArrayList<Pedido> pedidos,realizados;
     private static ProductManagerImpl instance;
-    Logger log= Logger.getLogger(ProductManagerImpl.class);
+    final Logger log= Logger.getLogger(ProductManagerImpl.class);
 
     public ProductManagerImpl() {
         org.apache.log4j.BasicConfigurator.configure();
@@ -19,6 +19,7 @@ public class ProductManagerImpl implements ProductManager {
         this.productos = new ArrayList<Producto>();
         this.usuarios = new HashMap<String, Usuario>();
         this.pedidos = new ArrayList<Pedido>();
+        this.realizados=new ArrayList<Pedido>();
 
         Producto a=new Producto("Leche",5);
         productos.add(a);
@@ -77,8 +78,8 @@ public class ProductManagerImpl implements ProductManager {
         return productos;
     }
 
-    public String realizarPedido(String user, String[] cosas,int[] cantidad) {
-        boolean existe;
+    public boolean realizarPedido(String user, String[] cosas,int[] cantidad) {
+        boolean existe,hecho=false;
         String frase="";
         log.info(pedidos);
         if(usuarios.containsKey(user)){
@@ -100,12 +101,13 @@ public class ProductManagerImpl implements ProductManager {
                 }
                 pedidos.add(p);
                 usuarios.get(user).setPedido(p);
+                hecho=true;
             }else{frase=frase+"Numero de productos distinto a numero de cantidades";}
         }else{frase=frase+"El usuario no esta autorizado a realizar pedidos";}
 
-        log.info(pedidos);
+        //log.info(pedidos);
         log.info(frase);
-        return frase;
+        return hecho;
     }
 
     public String servirPedido() {
@@ -123,6 +125,7 @@ public class ProductManagerImpl implements ProductManager {
         }
         log.info(pedidos);
         usuarios.get(siguiente.getUsuario()).pedidoRealizado();
+        realizados.add(siguiente);
         frase=frase+"TOTAL: "+precio;
         return frase;
     }

@@ -7,7 +7,7 @@ public interface ProductManager {
 
     ArrayList<Producto> productosPrecio();
 
-    String realizarPedido(String user, String[] cosas,int[] cantidad);
+    boolean realizarPedido(String user, String[] cosas,int[] cantidad);
 
     String servirPedido();
 

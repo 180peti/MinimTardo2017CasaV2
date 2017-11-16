@@ -47,12 +47,18 @@ public class PMService {
         cantidad[0]=1;
         cantidad[1]=2;
         cantidad[2]=3;
-
+        /*
         if(!test.getUsuarios().containsKey(user)){
             Usuario usuario=new Usuario(user);
             test.setUsuario(usuario);
         }
-        return test.realizarPedido(user,cosas,cantidad);
+
+       */
+        if (test.realizarPedido(user,cosas,cantidad))
+        {
+            return"Pedido realizado con exito";
+        }else{return "El pedido no se ha podido realizar";}
+
 
     }
 
