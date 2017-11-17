@@ -16,6 +16,7 @@ public class Pedido {
 
     }
 
+
     public void añadirProducto(Producto pr,int cantidad){
         if(productos.contains(pr)){
             cantidades.put(pr.getNombre(),cantidades.get(pr.getNombre())+cantidad);

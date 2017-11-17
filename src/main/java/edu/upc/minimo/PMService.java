@@ -18,6 +18,7 @@ public class PMService {
         for(Producto p:ordenado){
             cosas=cosas+"El producto "+p.getNombre()+" vale "+p.getPrecio()+" euros.\n";
         }
+
         return cosas;
     }
 
@@ -32,13 +33,11 @@ public class PMService {
         }
         return cosas;
     }
-
-
-    @Path("/pedir/{usuario}")
+    //Para probar el resto de funcionalidades.
+    @Path("/pedir/{username}")
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public String pedido(@PathParam("usuario") String user/*,String[] cosas,int[] cantidad*/){
-
+    @Produces(MediaType.TEXT_PLAIN)
+    public String pedido(@PathParam("username") String user){
         String[] cosas=new String[3];
         cosas[0]="Leche";
         cosas[1]="Huevos";
@@ -47,21 +46,9 @@ public class PMService {
         cantidad[0]=1;
         cantidad[1]=2;
         cantidad[2]=3;
-        /*
-        if(!test.getUsuarios().containsKey(user)){
-            Usuario usuario=new Usuario(user);
-            test.setUsuario(usuario);
-        }
-
-       */
-        if (test.realizarPedido(user,cosas,cantidad))
-        {
-            return"Pedido realizado con exito";
-        }else{return "El pedido no se ha podido realizar";}
-
-
+        if(test.realizarPedido(user,cosas,cantidad)){return"pedido estandar realizado";}
+        else{return "Error al hacer el pedido";}
     }
-
 
     @Path("/servir")
     @GET
@@ -83,42 +70,7 @@ public class PMService {
         }
         return frase;
     }
-    /*
-    @Path("/pedir")
-    @POST
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response hacerPedido(String usuario,String[] cosas,int[] cantidades){
-        int estado=501;
-        if(test.getUsuarios().containsKey(usuario)) {
-            int i = 0;
-            Producto[] pedir = new Producto[cosas.length];
-            int[] cantidad = new int[cantidades.length];
-            for (String cosa : cosas) {
-                for (Producto p : test.getProductos()) {
-                    if (cosa == p.getNombre()) {
-                        pedir[i] = p;
-                        cantidad[i] = cantidades[i];
-                        i++;
-                        break;
-                    }
-                }
-            }
-            Producto[] tienen=new Producto[i];
-            int[] cuantos = new int[i];
-            i=0;
-            for(Producto p:pedir){
-                if (p != null) {
-                    tienen[i]=p;
-                    cuantos[i]=cantidad[i];
-                    i++;
-                }
-            }
-            test.realizarPedido(usuario,tienen,cuantos);
-            estado=201;
-        }
 
-        return Response.status(estado).build();
-    }*/
 
 }
 

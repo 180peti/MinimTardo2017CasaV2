@@ -78,11 +78,12 @@ public class ProductManagerImpl implements ProductManager {
         return productos;
     }
 
-    public boolean realizarPedido(String user, String[] cosas,int[] cantidad) {
+
+    public boolean realizarPedido(String user, String[] cosas, int[] cantidad) {
         boolean existe,hecho=false;
         String frase="";
         log.info(pedidos);
-        if(usuarios.containsKey(user)){
+        if(usuarios.containsKey(user))
             if(cosas.length==cantidad.length) {
                 Pedido p=new Pedido(user);
                 for(int i=0;i<cosas.length;i++)
@@ -103,7 +104,7 @@ public class ProductManagerImpl implements ProductManager {
                 usuarios.get(user).setPedido(p);
                 hecho=true;
             }else{frase=frase+"Numero de productos distinto a numero de cantidades";}
-        }else{frase=frase+"El usuario no esta autorizado a realizar pedidos";}
+        else{frase="El usuario no esta autorizado a realizar pedidos";}
 
         //log.info(pedidos);
         log.info(frase);
